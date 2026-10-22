@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Movie Ratings</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+  <h1>Audience and Critics’ Movie Ratings</h1>
+
+  <p>
+    Explore audience and critics’ scores for the movies
+    in this dataset.
+  </p>
+
+  <div class="table-container">
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Genre</th>
+          <th scope="col">Audience Score</th>
+          <th scope="col">Critics Score</th>
+          <th scope="col">Year</th>
+        </tr>
+      </thead>
+
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <p id="status" role="status">Loading data...</p>
+
+  <p>Dataset: Hollywood’s Most Profitable Stories.</p>
+</body>
+</html>
