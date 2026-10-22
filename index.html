@@ -9,6 +9,10 @@
   <link rel="stylesheet" href="style.css">
 
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <!-- Load Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+
   <script src="script.js" defer></script>
 </head>
 
@@ -19,6 +23,24 @@
     Explore audience and critics’ scores for the movies
     in this dataset.
   </p>
+
+  <!-- Chart -->
+  <h2>Audience vs Critics: First 10 Movies</h2>
+
+  <p>
+    The chart shows the first 10 movies in the CSV file.
+  </p>
+
+  <div class="chart-container">
+    <canvas
+      id="ratingsChart"
+      role="img"
+      aria-label="Audience and critics scores for the first ten movies. The scores are also available in the table below."
+    ></canvas>
+  </div>
+
+  <!-- Table -->
+  <h2>All Movies</h2>
 
   <div class="table-container">
     <table id="dataTable">

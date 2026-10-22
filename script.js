@@ -4,8 +4,10 @@ Papa.parse("movies.csv", {
   skipEmptyLines: "greedy",
 
   complete: function (results) {
+    const movies = results.data;
+
+    // Create the table
     const tbody = document.querySelector("#dataTable tbody");
-    const status = document.querySelector("#status");
 
     const columns = [
       "title",
@@ -17,7 +19,7 @@ Papa.parse("movies.csv", {
 
     tbody.textContent = "";
 
-    results.data.forEach(function (row) {
+    movies.forEach(function (row) {
       const tr = document.createElement("tr");
 
       columns.forEach(function (column) {
@@ -30,13 +32,75 @@ Papa.parse("movies.csv", {
       tbody.appendChild(tr);
     });
 
-    status.textContent =
-      results.data.length + " movies loaded.";
+    document.querySelector("#status").textContent =
+      movies.length + " movies loaded.";
+
+    // Select the first 10 movies
+    const chartMovies = movies.slice(0, 10);
+
+    const titles = chartMovies.map(function (row) {
+      return row.title;
+    });
+
+    const audienceScores = chartMovies.map(function (row) {
+      return Number(row.Audience);
+    });
+
+    const criticsScores = chartMovies.map(function (row) {
+      return Number(row.critics);
+    });
+
+    // Create the bar chart
+    new Chart(document.getElementById("ratingsChart"), {
+      type: "bar",
+
+      data: {
+        labels: titles,
+
+        datasets: [
+          {
+            label: "Audience Score",
+            data: audienceScores,
+            backgroundColor: "#4766b0"
+          },
+          {
+            label: "Critics Score",
+            data: criticsScores,
+            backgroundColor: "#b45309"
+          }
+        ]
+      },
+
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 100,
+
+            title: {
+              display: true,
+              text: "Score (0–100)"
+            }
+          },
+
+          x: {
+            ticks: {
+              autoSkip: false,
+              minRotation: 45,
+              maxRotation: 60
+            }
+          }
+        }
+      }
+    });
   },
 
   error: function (error) {
     document.querySelector("#status").textContent =
-      "Could not load movies.csv. Please check the file name and open the website through a web server or GitHub Pages.";
+      "Could not load movies.csv.";
 
     console.error(error);
   }
